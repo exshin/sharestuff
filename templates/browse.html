@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+               "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+  <head>
+    <title>ShareStuff.us</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=500, initial-scale=1">
+
+    <script src="./static/js/jquery.min.js"></script>
+    <script src="./static/js/semantic.min.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">google.load("search", "1");</script>
+
+    <link rel="stylesheet" href="./static/css/semantic.min.css"></style>
+    <link rel="stylesheet" href="./static/css/main.css"></style>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+   </head>
+
+  <body>
+   <div class="ui orange inverted menu" id="navmenu" style="height: 45px">
+    <div class="ui dropdown item">
+      <img src="./static/images/share_icon.png" height="25" width="25" style="vertical-align: middle; margin-right: 7px"/>
+      Navigation
+      <div class="menu">
+        <a class="item" href="/browse"> <i class="search icon"></i>Browse</a>
+        <a class="item" href="/shared"> <i class="exchange icon"></i>Shared</a>
+        <a class="item" href="/borrowed"> <i class="pin icon"></i>Borrowed</a>
+        <a class="item" href="/friends"> <i class="users icon"></i>Friends</a>
+      </div>
+    </div>
+    <div class="ui dropdown right item">
+      <i class="user icon"></i> User <i class="dropdown icon"></i>
+      <div class="menu">
+        <a class="item" href="/profile">Profile</a>
+        <a class="item" href="/messages">Messages</a>
+        <a class="item" href="/settings">Settings</a>
+        <a class="item" href="/logout">Logout</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="ui segment" id="cards_window" style="width: 80%; margin-left:100px">
+
+    <div class="ui text menu" id="filtermenu">
+      <div class="item" style="width:40%">
+        <div class="ui icon input">
+          <input type="text" placeholder="Search...">
+          <i class="search icon"></i>
+        </div>
+      </div>
+
+      <div class="ui dropdown right item">
+        <i class="map marker icon"></i>
+        <span class="text">Distance</span>
+        <div class="menu">
+          <div class="header">
+            <i class="map marker icon"></i>
+            Filter by Location
+          </div>
+          <div class="divider"></div>
+          <div class="item">A Couple Blocks</div>
+          <div class="item">1 Mile</div>
+          <div class="item">3 Miles</div>
+          <div class="item">5 Miles</div>
+          <div class="item">10 Miles</div>
+          <div class="item">Doesn't Matter</div>
+        </div>
+      </div>
+      <div class="ui dropdown right item">
+        <i class="tags icon"></i>
+        <span class="text">Category</span>
+        <div class="menu">
+          <div class="header" style="margin-bottom: 15px">
+            <i class="tags icon"></i>
+            Filter by Category
+          </div>
+          <div class="ui small icon search input" style="margin-bottom: 10px">
+            <i class="search icon"></i>
+            <input type="text" name="search" placeholder="Search Categories">
+          </div>
+          <div class="divider"></div>
+          <div class="item">Sports</div>
+          <div class="item">Kitchen</div>
+          <div class="item">Furniture</div>
+          <div class="item">Clothing</div>
+          <div class="item">Tool</div>
+          <div class="item">Transportation</div>
+          <div class="item">Animal</div>
+          <div class="item">Everything is Awesome</div>
+        </div>
+      </div>
+      <div class="ui dropdown right item">
+        <i class="users icon"></i>
+        <span class="text">Friends</span>
+        <div class="menu">
+          <div class="header" style="margin-bottom: 15px">
+            <i class="users icon"></i>
+            Filter by Friends
+          </div>
+          <div class="ui small icon search input" style="margin-bottom: 10px">
+            <i class="search icon"></i>
+            <input type="text" name="search" placeholder="Search Friends">
+          </div>
+          <div class="divider"></div>
+          <div class="item">Tiffany Wu</div>
+          <div class="item">Jeff Hsieh</div>
+          <div class="item">David Zeng</div>
+          <div class="item">Wilson Huang</div>
+          <div class="item">George Chin</div>
+          <div class="item">Everyone</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui special cards" style="margin-top:50px">
+      <div class="card">
+        <div class="dimmable image">
+          <div class="ui inverted dimmer">
+            <div class="content">
+              <div class="center">
+                <div class="ui primary button">Request to Borrow</div>
+              </div>
+            </div>
+          </div>
+          <img class="card_image" src="/images/avatar/large/elliot.jpg" height=50 width=50>
+        </div>
+        <div class="content">
+          <div class="header">Friendly Kitten</div>
+          <div class="meta">
+            <a class="group">Animal</a>
+          </div>
+          <div class="description">
+            This friendly kitten is great with new furniture. Scratches up everything he sees.
+          </div>
+        </div>
+        <div class="extra content">
+          <a class="right floated created">
+            Joined in 2011
+          </a>
+          <a class="friends">
+            <i class="user icon"></i>
+            Tiffany Wu
+          </a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="dimmable image">
+          <div class="ui inverted dimmer">
+            <div class="content">
+              <div class="center">
+                <div class="ui primary button" onclick="switchImage">Request to Borrow</div>
+              </div>
+            </div>
+          </div>
+          <img class="card_image" src="/images/avatar/large/jenny.jpg" height=50 width=50>
+        </div>
+        <div class="content">
+          <div class="header">Shami</div>
+          <div class="meta">
+            <a class="group">Animal</a>
+          </div>
+          <div class="description">
+            A black cat. He's a terrible hunter and loves sleeping your keyboard.
+          </div>
+        </div>
+        <div class="extra content">
+          <a class="right floated created">
+            Joined in 2011
+          </a>
+          <a class="friends">
+            <i class="user icon"></i>
+            George Chin
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./static/js/main.js"></script>
+  <script type="text/javascript">$('.ui.primary.button').bind('click',switchImage);</script>
+
+  </body>
+
+</html>
+

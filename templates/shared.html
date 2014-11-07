@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+               "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+  <head>
+    <title>ShareStuff.us</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=500, initial-scale=1">
+
+    <script src="./static/js/jquery.min.js"></script>
+    <script src="./static/js/semantic.min.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">google.load("search", "1");</script>
+
+    <link rel="stylesheet" href="./static/css/semantic.min.css"></style>
+    <link rel="stylesheet" href="./static/css/main.css"></style>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+   </head>
+
+  <body>
+   <div class="ui orange inverted menu" id="navmenu" style="height: 45px">
+    <div class="ui dropdown item">
+      <img src="./static/images/share_icon.png" height="25" width="25" style="vertical-align: middle; margin-right: 7px"/>
+      Navigation
+      <div class="menu">
+        <a class="item" href="/browse"> <i class="search icon"></i>Browse</a>
+        <a class="item" href="/shared"> <i class="exchange icon"></i>Shared</a>
+        <a class="item" href="/borrowed"> <i class="pin icon"></i>Borrowed</a>
+        <a class="item" href="/friends"> <i class="users icon"></i>Friends</a>
+      </div>
+    </div>
+    <div class="ui dropdown right item">
+      <i class="user icon"></i> User <i class="dropdown icon"></i>
+      <div class="menu">
+        <a class="item" href="/profile">Profile</a>
+        <a class="item" href="/messages">Messages</a>
+        <a class="item" href="/settings">Settings</a>
+        <a class="item" href="/logout">Logout</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="ui segment" id="cards_window" style="width: 80%; margin-left:100px">
+
+     <div class="ui text menu" id="filtermenu">
+      <div class="item" style="width:40%">
+        <div class="ui icon input">
+          <input type="text" placeholder="Search...">
+          <i class="search icon"></i>
+        </div>
+      </div>
+
+      <div class="ui right item">
+        <div class="ui teal button" id="add_button">
+          <i class="plus icon" style="margin: 0px"></i>
+        </div>
+      </div>
+      <div class="ui dropdown right item">
+        <i class="pin icon"></i>
+        <span class="text">Borrow Status</span>
+        <div class="menu">
+          <div class="header" style="margin-bottom: 15px">
+            <i class="pin icon"></i>
+            Filter by Borrowed
+          </div>
+          <div class="divider"></div>
+          <div class="item">Borrowed</div>
+          <div class="item">Un-Borrowed</div>
+        </div>
+      </div>
+      <div class="ui dropdown right item">
+        <i class="tags icon"></i>
+        <span class="text">Category</span>
+        <div class="menu">
+          <div class="header" style="margin-bottom: 15px">
+            <i class="tags icon"></i>
+            Filter by Category
+          </div>
+          <div class="ui small icon search input" style="margin-bottom: 10px">
+            <i class="search icon"></i>
+            <input type="text" name="search" placeholder="Search Categories">
+          </div>
+          <div class="divider"></div>
+          <div class="item">Sports</div>
+          <div class="item">Kitchen</div>
+          <div class="item">Furniture</div>
+          <div class="item">Clothing</div>
+          <div class="item">Tool</div>
+          <div class="item">Transportation</div>
+          <div class="item">Animal</div>
+          <div class="item">Everything is Awesome</div>
+        </div>
+      </div>
+      
+    </div>
+
+
+  </div>
+
+
+    <div class="ui modal transition hidden" style="margin-top: -242px;">
+      <i class="close icon"></i>
+      <div class="header">
+        Add New Item to Share!
+      </div>
+      <div class="content">
+        <div class="description">
+          <div class="ui form">
+            <div class="two fields">
+              <div class="field">
+                <label>Title/ Name</label>
+                <div class="one field">
+                  <div class="field">
+                    <input type="text" name="name" placeholder="">
+                  </div>
+                </div>
+              </div>
+              <div class="field">
+                <label>Category</label>
+                <div class="ui selection dropdown">
+                  <input type="hidden" name="gender">
+                  <div class="default text">Category</div>
+                  <i class="dropdown icon"></i>
+                  <div class="menu">
+                    <div class="ui small icon search input" style="margin-bottom: 10px; width: 90%">
+                      <i class="search icon"></i>
+                      <input type="text" name="search" placeholder="Search Categories">
+                    </div>
+                    <div class="item" data-value="sports">Sports</div>
+                    <div class="item" data-value="kitchen">Kitchen</div>
+                    <div class="item" data-value="furniture">Furniture</div>
+                    <div class="item" data-value="clothing">Clothing</div>
+                    <div class="item" data-value="tool">Tool</div>
+                    <div class="item" data-value="transportation">Transportation</div>
+                    <div class="item" data-value="animal">Animal</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="field">
+              <label>Description</label>
+              <textarea id="description"></textarea>
+            </div>
+            <div class="field">
+              <div class="ui toggle checkbox">
+                <input type="radio" name="privacy">
+                <label>Allow <b>anyone</b> to view this item</label>
+              </div>
+            </div>
+            <div class="one field">
+              <div class="field">
+                <label>Image Url (Optional)</label>
+                <input type="text" name="item-url" placeholder="http://">
+              </div>
+            </div>
+              
+          </div>
+        </div>
+      </div>
+      <div class="actions">
+        <div class="ui black button">
+          Cancel
+        </div>
+        <div class="ui positive right labeled icon button">
+          Share
+          <i class="checkmark icon"></i>
+        </div>
+      </div>
+    </div>
+
+  <script src="./static/js/main.js"></script>
+  <script src="./static/js/shared.js"></script>
+  
+  </body>
+
+</html>
+

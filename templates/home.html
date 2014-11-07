@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+               "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+  <head>
+    <title>ShareStuff.us</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=500, initial-scale=1">
+
+    <script src="./static/js/jquery.min.js"></script>
+    <script src="./static/js/semantic.min.js"></script>
+
+    <link rel="stylesheet" href="./static/css/semantic.min.css"></style>
+    <link rel="stylesheet" href="./static/css/main.css"></style>
+    <link rel="stylesheet" href="./static/css/home.css"></style>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+   </head>
+
+  <body>
+    <div class="ui orange inverted menu" id="navmenu" style="height: 45px">
+      <div class="item">
+        <img class="ui left floated image" src="./static/images/share_icon.png" height="25" width="25" style="bottom: 5pxs; margin-right: 10px"/>
+        ShareStuff
+      </div>
+      <div class="right item">
+        <div class="ui primary button" id="sign_up_button">Sign up</div>
+      </div>
+    </div>
+
+    <div class="ui small form segment" id="log_in_form">
+      <h2 style="margin-top: 5px">
+        Log In
+      </h2>
+      <div class="ui divider"></div>
+      <div class="field">
+        <label>Username</label>
+        <input placeholder="Username" type="text">
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <input type="password">
+      </div>
+      <div class="ui small submit button" style="float: right">Log In</div>
+    </div>
+
+
+    <div class="ui small modal transition hidden" style="margin-top: -242px;">
+      <i class="close icon"></i>
+      <div class="header">
+        Create a New Account
+      </div>
+      <div class="content">
+        <div class="description">
+          <div class="ui small form segment" id="sign_up_form">
+            <div class="ui error message" id="password_error">
+              <div class="header">Passwords Don't Match!</div>
+              <p>Try again. You've got it this time.</p>
+            </div>
+            <div class="ui error message" id="email_error">
+              <div class="header">Email Already Exists!</div>
+              <p>Try again? Or request a <a href="/password_reset">password reset</a>.</p>
+            </div>
+            <div class="ui error message" id="agree_error">
+              <div class="header">Terms and Conditions</div>
+              <p>Please agree to the Terms and Conditions.</p>
+            </div>
+            <div class="two fields">
+              <div class="field">
+                <label>First Name</label>
+                <input placeholder="First Name" type="text" id="signup_firstname">
+              </div>
+              <div class="field">
+                <label>Last Name</label>
+                <input placeholder="Last Name" type="text" id="signup_lastname">
+              </div>
+            </div>
+            <div class="field">
+              <label>Email</label>
+              <input placeholder="Email" type="text" id="signup_email">
+            </div>
+            <div class="field">
+              <label>Username</label>
+              <input placeholder="Username" type="text" id="signup_username">
+            </div>
+            <div class="two fields">
+              <div class="field">
+                <label>Password</label>
+                <input type="password" id="signup_password">
+              </div>
+              <div class="field">
+                <label>Confirm Password</label>
+                <input type="password" id="signup_password_confirm">
+              </div>
+            </div>
+            <div class="inline field">
+              <div class="ui small checkbox" style="font-size: 12px">
+                <input type="checkbox" id="signup_agree">
+                <label>I agree to the Terms and Conditions</label>
+              </div>
+            </div>
+          </div>
+          <div class="ui small black button" onclick="hide_modal()">
+            Cancel
+          </div>
+          <div class="ui small positive right labeled icon button" id="sign_up_confirm" style="float: right" onclick="signup()">
+            Sign up
+            <i class="checkmark icon"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  <script src="./static/js/main.js"></script>
+  <script src="./static/js/home.js"></script>
+ 
+  </body>
+
+</html>
+

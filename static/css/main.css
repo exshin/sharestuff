@@ -1,0 +1,21 @@
+#navmenu {
+	font-size: 16px !important;
+}
+
+#filtermenu {
+	font-size: 14px !important;
+}
+
+#description {
+	min-height: 5em !important;
+	height: 5em;
+}
+
+/* Sets card height to about two lines of description */
+.card .description {
+  min-height: 50px;
+}
+
+.card_image {
+	height: 200px !important;
+}

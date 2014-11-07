@@ -1,0 +1,11 @@
+body {
+    background-image: url("../images/nature_background.jpg");
+    background-size: cover;
+}
+#log_in_form {
+	display: block; 
+	width: 33%; 
+	float:right; 
+	margin-right: 100px;
+	margin-top: 50px;
+} 

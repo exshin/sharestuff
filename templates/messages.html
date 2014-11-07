@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+               "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+  <head>
+    <title>ShareStuff.us</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=500, initial-scale=1">
+
+    <script src="./static/js/jquery.min.js"></script>
+    <script src="./static/js/semantic.min.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">google.load("search", "1");</script>
+
+    <link rel="stylesheet" href="./static/css/semantic.min.css"></style>
+    <link rel="stylesheet" href="./static/css/main.css"></style>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+   </head>
+
+  <body>
+   <div class="ui orange inverted menu" id="navmenu" style="height: 45px">
+    <div class="ui dropdown item">
+      <img src="./static/images/share_icon.png" height="25" width="25" style="vertical-align: middle; margin-right: 7px"/>
+      Navigation
+      <div class="menu">
+        <a class="item" href="/browse"> <i class="search icon"></i>Browse</a>
+        <a class="item" href="/shared"> <i class="exchange icon"></i>Shared</a>
+        <a class="item" href="/borrowed"> <i class="pin icon"></i>Borrowed</a>
+        <a class="item" href="/friends"> <i class="users icon"></i>Friends</a>
+      </div>
+    </div>
+    <div class="ui dropdown right item">
+      <i class="user icon"></i> User <i class="dropdown icon"></i>
+      <div class="menu">
+        <a class="item" href="/profile">Profile</a>
+        <a class="item" href="/messages">Messages</a>
+        <a class="item" href="/settings">Settings</a>
+        <a class="item" href="/logout">Logout</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="ui segment" id="cards_window" style="width: 80%; margin-left:100px">
+
+  </div>
+
+  <script src="./static/js/main.js"></script>
+  <script type="text/javascript">$('.ui.primary.button').bind('click',switchImage);</script>
+
+  </body>
+
+</html>
+
