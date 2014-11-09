@@ -10,6 +10,9 @@
 
     <script src="./static/js/jquery.min.js"></script>
     <script src="./static/js/semantic.min.js"></script>
+    <script type=text/javascript>
+      $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+    </script>
 
     <link rel="stylesheet" href="./static/css/semantic.min.css"></style>
     <link rel="stylesheet" href="./static/css/main.css"></style>
@@ -34,15 +37,19 @@
         Log In
       </h2>
       <div class="ui divider"></div>
+      <div class="ui error message" id="login_error">
+        <div class="header">Incorrect Username or Password</div>
+        <p>Please try again</p>
+      </div>
       <div class="field">
         <label>Username</label>
-        <input placeholder="Username" type="text">
+        <input placeholder="Username" type="text" id="login_username">
       </div>
       <div class="field">
         <label>Password</label>
-        <input type="password">
+        <input type="password" placeholder="password" id="login_password">
       </div>
-      <div class="ui small submit button" style="float: right">Log In</div>
+      <div class="ui small submit button" style="float: right" onclick="login()">Log In</div>
     </div>
 
 
@@ -59,7 +66,7 @@
               <p>Try again. You've got it this time.</p>
             </div>
             <div class="ui error message" id="email_error">
-              <div class="header">Email Already Exists!</div>
+              <div class="header">Email or User Name Already Exists!</div>
               <p>Try again? Or request a <a href="/password_reset">password reset</a>.</p>
             </div>
             <div class="ui error message" id="agree_error">

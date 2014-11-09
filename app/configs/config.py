@@ -61,10 +61,7 @@ config = ConfigParser.ConfigParser()
 config.read('%s/config.cfg' % path)
 config.getdef = types.MethodType(getdef, config)
 
-pathDIR = {'pathDIR': config.getdef('paths', 'pathDIR', '')
-        }
-
-connStr = {'heroku_movies': config.getdef('db', 'heroku_movies', '')
+connStr = {'sharestuff': config.getdef('db', 'sharestuff', '')
     }
 
 

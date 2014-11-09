@@ -7,13 +7,22 @@ $('.modal')
 $('.ui.checkbox')
   .checkbox()
 ;
-
+ 
 function hide_modal() {
 	$('.modal').modal('hide');
 }
 
+$("#login_password").keypress(function(event) {
+    if (event.which == 13) {
+        event.preventDefault();
+        login();
+    }
+});
+
+
+
 function signup() {
-	new_user = {}
+	new_user = {};
 	new_user['first_name'] = $('#signup_firstname').val();
 	new_user['last_name'] = $('#signup_lastname').val();
 	new_user['email'] = $('#signup_email').val();
@@ -40,15 +49,40 @@ function signup() {
 			$('#password_error')[0].style.display = 'none';
 			$('#email_error')[0].style.display = 'none';
 			$('#agree_error')[0].style.display = 'none';
-			hide_modal();
+			$insert_new_user(new_user, function(response) {
+				console.log(response);
+				if (response == 'fail') {
+					$('#password_error')[0].style.display = 'none';
+					$('#email_error')[0].style.display = 'block';
+					$('#agree_error')[0].style.display = 'none';
+				} else {
+					hide_modal();
+				}
+			});
+			
 		}
 	}
 }
 
+function login() {
+	user_data = {};
+	user_data['username'] = $('#login_username').val();
+	user_data['password'] = $('#login_password').val();
+	$login_user(user_data, function(response) {
+		console.log(response);
+		if (response == 'success') {
+			window.location.href = '/browse';
+		} else {
+			$('#login_error')[0].style.display = 'block';
+		}
+	});
+}
+
 function $insert_new_user(new_user,callback,failback) {
+	// Create a new user
 	var req = {
 		type: 'POST',
-		url: localhost + '/api/new_user',
+		url: $SCRIPT_ROOT + '/api/new_user',
 		data: new_user
 	};
 	$.ajax(req).done(function(response) {
@@ -61,4 +95,24 @@ function $insert_new_user(new_user,callback,failback) {
 		console.log(fail_response.responseText);
 	});
 }
+
+function $login_user(user_data,callback,failback) {
+	// Log in
+	var req = {
+		type: 'POST',
+		url: $SCRIPT_ROOT + '/login',
+		data: user_data
+	};
+	$.ajax(req).done(function(response) {
+		console.log(req);
+		console.log(response);
+		$user_data = user_data;
+		callback(response);
+	}).fail(function(fail_response) {
+		console.log('Issue POSTing new user to Server');
+		console.log(fail_response.responseText);
+	});
+}
+
+
 

@@ -1,6 +1,23 @@
 #!/usr/bin/python27
 #-*- coding: utf-8 -*-
 
+sql_insert_new_users = """
+INSERT INTO users (user_name,user_email,user_avatar,user_firstname,user_lastname,user_password,google_auth_id,created_date)
+SELECT %s,%s,%s,%s,%s,%s,%s,current_date
+WHERE NOT EXISTS (SELECT id FROM users WHERE user_email = %s OR user_name = %s )
+RETURNING id;
+"""
+
+sql_insert_new_item = """
+INSERT INTO items (item_name,item_description,item_price,item_image_url,item_category,item_owner_id,item_owner_name,created_date,all_can_view)
+SELECT %s,%s,%s,%s,%s,%s,%s,current_date,%s
+RETURNING id;
+"""
+
+
+
+
+
 
 sql_movie_counts = """
 SELECT DISTINCT
@@ -350,14 +367,6 @@ GROUP BY
 	,previous_events.max_event_date
 	,next_events.min_event_date
 	,u.user_email
-"""
-
-# [user_name,user_email,user_avatar,user_data,google_auth_id,admin_status,user_email]
-sql_insert_new_users = """
-INSERT INTO users (user_name,user_email,user_avatar,user_data,google_auth_id,admin_status)
-SELECT %s,%s,%s,%s,%s,%s
-WHERE NOT EXISTS (SELECT id FROM users WHERE user_email = %s )
-RETURNING id;
 """
 
 # [group_name,group_location,group_image,group_creator_id,group_name]
