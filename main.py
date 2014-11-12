@@ -13,6 +13,7 @@ import json
 
 from app.api.new_user import *
 from app.api.user_login import *
+from app.api.items import *
 
 
 app = Flask(__name__)
@@ -35,21 +36,24 @@ def home():
 @app.route('/index')
 def index():
     if session.get('logged_in'):
-        return redirect("/browse", code=302)
+        return redirect(url_for('browse'))
     else:
         return render_template('home.html')
 
 @app.route('/browse')
 def browse():
     if session.get('logged_in'):
-        return render_template('browse.html', user_firstname=session.get('user_firstname'))
+        items = get_all_items()
+        return render_template('browse.html', user_firstname=session.get('user_firstname'), items=items)
     else:
         return redirect("/index", code=302)
 
 @app.route('/shared')
 def shared():
     if session.get('logged_in'):
-        return render_template('shared.html', user_firstname=session.get('user_firstname'))
+        userid = session.get('userid')
+        items = get_items(userid)
+        return render_template('shared.html', user_firstname=session.get('user_firstname'), items=items)
     else:
         return redirect("/index", code=302)
 
@@ -88,6 +92,21 @@ def new_user():
             else:
                 return 'fail'
 
+@app.route('/api/new_item', methods=['GET','POST'])
+def new_item():
+    # add new item to db
+    if request.method == 'POST':
+        new_item_data = ast.literal_eval(json.dumps(request.form, separators=(',',':')))
+        print new_item_data
+        if new_item_data:
+            # insert item data
+            new_item_data['item_owner_id'] = session.get('userid')
+            new_item_data['item_owner_name'] = session.get('username')
+            new_item_id = add_new_item(new_item_data)
+            if new_item_id:
+                return 'success'
+            else:
+                return 'fail'
 
 @app.route('/login', methods=['GET','POST'])
 def login_view():
@@ -114,7 +133,7 @@ def login_view():
         session['user_lastname'] = user_data_db[6]
         session['user_email'] = user_data_db[2]
         session['user_avatar'] = user_data_db[8]
-        session['user_id'] = user_data_db[0]
+        session['userid'] = user_data_db[0]
         return 'success'
     
 

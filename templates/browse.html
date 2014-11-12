@@ -47,12 +47,12 @@
     <div class="ui text menu" id="filtermenu">
       <div class="item" style="width:40%">
         <div class="ui icon input">
-          <input type="text" placeholder="Search...">
+          <input type="text" placeholder="Search..." onkeyup="filter_search(this)">
           <i class="search icon"></i>
         </div>
       </div>
 
-      <div class="ui dropdown right item">
+      <div class="ui dropdown right item dropdown_filter_distance">
         <i class="map marker icon"></i>
         <span class="text">Distance</span>
         <div class="menu">
@@ -61,15 +61,15 @@
             Filter by Location
           </div>
           <div class="divider"></div>
-          <div class="item">A Couple Blocks</div>
-          <div class="item">1 Mile</div>
-          <div class="item">3 Miles</div>
-          <div class="item">5 Miles</div>
-          <div class="item">10 Miles</div>
-          <div class="item">Doesn't Matter</div>
+          <div class="item" data-value="blocks">A Couple Blocks</div>
+          <div class="item" data-value="mile_1">1 Mile</div>
+          <div class="item" data-value="mile_3">3 Miles</div>
+          <div class="item" data-value="mile_5">5 Miles</div>
+          <div class="item" data-value="mile-10">10 Miles</div>
+          <div class="item" data-value="all">Doesn't Matter</div>
         </div>
       </div>
-      <div class="ui dropdown right item">
+      <div class="ui dropdown right item dropdown_filter_category">
         <i class="tags icon"></i>
         <span class="text">Category</span>
         <div class="menu">
@@ -82,17 +82,18 @@
             <input type="text" name="search" placeholder="Search Categories">
           </div>
           <div class="divider"></div>
-          <div class="item">Sports</div>
-          <div class="item">Kitchen</div>
-          <div class="item">Furniture</div>
-          <div class="item">Clothing</div>
-          <div class="item">Tool</div>
-          <div class="item">Transportation</div>
-          <div class="item">Animal</div>
-          <div class="item">Everything is Awesome</div>
+          <div class="item" data-value="sports">Sports</div>
+          <div class="item" data-value="kitchen">Kitchen</div>
+          <div class="item" data-value="furniture">Furniture</div>
+          <div class="item" data-value="clothing">Clothing</div>
+          <div class="item" data-value="tool">Tool</div>
+          <div class="item" data-value="transportation">Transportation</div>
+          <div class="item" data-value="animal">Animal</div>
+          <div class="item" data-value="electronics">Electronics</div>
+          <div class="item" data-value="all">Everything is Awesome</div>
         </div>
       </div>
-      <div class="ui dropdown right item">
+      <div class="ui dropdown right item dropdown_filter_friends">
         <i class="users icon"></i>
         <span class="text">Friends</span>
         <div class="menu">
@@ -105,18 +106,19 @@
             <input type="text" name="search" placeholder="Search Friends">
           </div>
           <div class="divider"></div>
-          <div class="item">Tiffany Wu</div>
-          <div class="item">Jeff Hsieh</div>
-          <div class="item">David Zeng</div>
-          <div class="item">Wilson Huang</div>
-          <div class="item">George Chin</div>
-          <div class="item">Everyone</div>
+          <div class="item" data-value="tiffany wu">Tiffany Wu</div>
+          <div class="item" data-value="jeff hsieh">Jeff Hsieh</div>
+          <div class="item" data-value="david zeng">David Zeng</div>
+          <div class="item" data-value="wilson huang">Wilson Huang</div>
+          <div class="item" data-value="george chin">George Chin</div>
+          <div class="item" data-value="all">Everyone</div>
         </div>
       </div>
     </div>
 
     <div class="ui special cards" style="margin-top:50px">
-      <div class="card">
+      {% for item in items %}
+        <div class="card">
         <div class="dimmable image">
           <div class="ui inverted dimmer">
             <div class="content">
@@ -125,62 +127,34 @@
               </div>
             </div>
           </div>
-          <img class="card_image" src="/images/avatar/large/elliot.jpg" height=50 width=50>
+          <img class="card_image" src="{{item[4]}}" height=50 width=50>
         </div>
         <div class="content">
-          <div class="header">Friendly Kitten</div>
+          <div class="header item_name">{{item[1]}}</div>
           <div class="meta">
-            <a class="group">Animal</a>
+            <a class="group item_category">{{item[5]}}</a>
           </div>
-          <div class="description">
-            This friendly kitten is great with new furniture. Scratches up everything he sees.
+          <div class="description item_description">
+            {{item[2]}}
           </div>
         </div>
-        <div class="extra content">
-          <a class="right floated created">
-            Joined in 2011
+        <div class="extra content" style="font-size: 11px">
+          <a class="right floated created date">
+            Added {{item[8]}}
           </a>
-          <a class="friends">
+          <a class="friends item_owner" data-userid='{{item[6]}}'>
             <i class="user icon"></i>
-            Tiffany Wu
+            {{item[11]}}
           </a>
         </div>
       </div>
-      <div class="card">
-        <div class="dimmable image">
-          <div class="ui inverted dimmer">
-            <div class="content">
-              <div class="center">
-                <div class="ui primary button" onclick="switchImage">Request to Borrow</div>
-              </div>
-            </div>
-          </div>
-          <img class="card_image" src="/images/avatar/large/jenny.jpg" height=50 width=50>
-        </div>
-        <div class="content">
-          <div class="header">Shami</div>
-          <div class="meta">
-            <a class="group">Animal</a>
-          </div>
-          <div class="description">
-            A black cat. He's a terrible hunter and loves sleeping on your keyboard. Also cries at night.
-          </div>
-        </div>
-        <div class="extra content">
-          <a class="right floated created">
-            Joined in 2011
-          </a>
-          <a class="friends">
-            <i class="user icon"></i>
-            George Chin
-          </a>
-        </div>
-      </div>
+      {% endfor %}
     </div>
+
   </div>
 
   <script src="./static/js/main.js"></script>
-  <script type="text/javascript">$('.ui.primary.button').bind('click',switchImage);</script>
+  <script src="./static/js/browse.js"></script>
 
   </body>
 
