@@ -10,5 +10,7 @@ A) Install Dependencies
 		- psycopg2
 		- requests
 		- json
+	2) Create config.cfg in directory "app/configs/"
+		- edit config.cfg and include credentials to db
 B) Run main.py
 C) In a web browser, go to localhost
