@@ -18,16 +18,6 @@ from app.api.items import *
 
 app = Flask(__name__)
 
-# Initialize flask-login
-def init_login():
-    login_manager = login.LoginManager()
-    login_manager.init_app(app)
-
-    # Create user loader function
-    @login_manager.user_loader
-    def load_user(user_id):
-        return db.session.query(User).get(user_id)
-
 
 @app.route('/')
 def home():
@@ -159,13 +149,12 @@ def logout():
 
 app.secret_key = 'A0Zr80j/3yX r~XHH!jnN]L^X/,?RT'
 
-# Initialize flask-login
-init_login()
+
 
 if __name__ == '__main__':
     app.debug = True
     app.run(host='0.0.0.0',port=80)
-    login_manager.init_app(app)
+
 
 
 
