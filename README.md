@@ -5,15 +5,19 @@ How to Set Up Locally
 ---------------------
 
 Install Dependencies
-	1. Python2.7
-		* flask
-		* flask_Login
-		* flask_Admin
-		* psycopg2
-		* requests
-		* json
-	2. Create config.cfg in directory "app/configs/"
-		* edit config.cfg and include credentials to db
+
+1. Python2.7
+
+* flask
+* flask_Login
+* flask_Admin
+* psycopg2
+* requests
+* json
+
+2. Create config.cfg in directory "app/configs/"
+
+* edit config.cfg and include credentials to db
 
 Run main.py
 
