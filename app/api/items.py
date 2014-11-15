@@ -35,7 +35,6 @@ def get_items(user_id):
 	cursor.execute('SELECT * FROM items WHERE item_owner_id = %s',[user_id])
 	items_data = cursor.fetchall()
 	if items_data:
-		print items_data
 		return items_data
 	else:
 		return None
@@ -47,7 +46,6 @@ def get_all_items():
 	cursor.execute("SELECT i.*, u.user_firstname || ' ' || u.user_lastname user_realname FROM items i LEFT JOIN users u ON i.item_owner_id = u.id WHERE all_can_view is true")
 	items_data = cursor.fetchall()
 	if items_data:
-		print items_data
 		return items_data
 	else:
 		return None
